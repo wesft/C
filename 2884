@@ -1,0 +1,23 @@
+#include <stdio.h>
+
+int main(){
+    int i,j;
+    scanf("%d %d", &i, &j);
+    if (j>=45){
+        j=j-45;
+        printf("%d %d", i, j);
+    }    
+    else{
+        if (i==0){
+            i=23;
+            j=j+15;
+            printf("%d %d", i, j);
+        }
+        else{
+            i=i-1;
+            j=j+15;
+            printf("%d %d", i, j);
+        }                           
+    }
+    return 0;
+}
