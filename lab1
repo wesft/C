@@ -1,0 +1,69 @@
+Lab-1 : Pointer Variable
+ • Guess the result & Why ?
+ // Problem-1
+ #include <stdio.h>
+ int main(void) {
+	int a[5] = { 1,3,5,7,9 };
+ 	int* ptr = (int*)(&a + 1);
+	printf("%d %d", *(a + 1), *(ptr- 1));
+ 	return 0;
+ }
+
+풀이
+
+a는 크기가 5인 정수 배열이며, 초기 값은 {1, 3, 5, 7, 9}이다.
+&a는 배열 전체의 시작 주소를 나타낸다.
+이때 &a의 타입은 int (*)[5] (5개의 int를 가진 배열을 가리키는 포인터)이다.
+&a + 1은 배열 a 전체의 크기만큼 주소를 증가시킨 값이다.
+결과적으로 &a + 1은 배열 끝 다음 주소를 가리킨다.
+(int*)로 형변환을 하여 ptr은 배열의 끝 다음 주소를 가리키는 int* 타입의 포인터가 된다.
+*(a + 1)에 대해 a는 배열의 시작 주소이며 a + 1은 a[1]의 주소를 의미한다.
+*(a + 1)은 a[1]의 값을 가리킨다. 따라서 *(a + 1)의 값은 3이다.
+*(ptr – 1)에 대해선 ptr은 배열의 끝 다음 주소를 가리키고 있다.
+ptr - 1은 배열의 마지막 요소 a[4]의 주소를 의미한다.
+*(ptr - 1)은 a[4]의 값을 가리킨다.
+
+따라서 *(ptr - 1)의 값은 9이다.
+
+ // Problem-2
+ #include <stdio.h>
+ char* c[] = { "Hello", "KoreaTech", "Computer", “Language" };
+ char** cp[] = { c + 3, c + 2, c + 1, c };
+ char*** cpp = cp;
+ int main(void) {
+ printf("%s ", **++cpp);
+ printf("%s ", *-- * ++cpp + 3);
+ printf("%s ", *cpp[-2] + 3);
+ printf("%s ", cpp[-1][-1] + 1);
+ return 0;
+ }
+
+풀이
+
+c 배열:
+c[0] = "Hello", c[1] = "KoreaTech", c[2] = "Computer", c[3] = "Language"
+cp 배열:
+cp[0] = c + 3 → "Language"
+cp[1] = c + 2 → "Computer"
+cp[2] = c + 1 → "KoreaTech"
+cp[3] = c → "Hello"
+cpp 포인터:
+cpp는 cp의 첫 번째 요소 cp[0]를 가리킨다.
+**++cpp
+cpp를 한 칸 증가 → cp[1] (가리키는 값: c[2])
+**cpp → "Computer"
+*--*++cpp + 3
+cpp를 다시 증가 → cp[2] (가리키는 값: c + 1)
+--*++cpp → c + 0 (가리키는 값: "Hello")
+"Hello" + 3 → "lo"
+*cpp[-2] + 3
+cpp[-2] → cp[0] (가리키는 값: c[3])
+*cpp[-2] → "Language"
+"Language" + 3 → "guage"
+cpp[-1][-1] + 1
+cpp[-1] → cp[1] (가리키는 값: c[2])
+cpp[-1][-1] → c[1] = "KoreaTech"
+"KoreaTech" + 1 → "oreaTech"
+
+그 결과
+Computer lo guage oreaTech
